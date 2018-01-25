@@ -102,3 +102,41 @@ db /= m
 dw1, dw2, and db are accumulators. Then, at the end use dw1, dw2, db to update w1, w2 and b, and then go back to take your next gradient descent step.
 
 Big drawback is as you add features, your for-loop will become a big bottleneck. Need to attack this using vectorization, to improve efficiency.
+# Python and Vectorization
+
+## Vectorization
+If you have a pair of vectors to multiply, by hand you need a for-loop. In python, can use np.dot() function.
+
+Can get some speedups by letting numpy handle things (vectorization for the CPU), instead of rolling your own or relying on brute force.
+## More Vectorization
+Rule of thumb -- wherever possible avoid explicit for-loops. numpy has many built-in functions that already vectorize things (np.exp(), np.dot()). Go back and look at our example from GD on m Examples, we have two for-loops. Outer one, and a second one where we figure out dw1, dw2, db. Can use vectorization to replace the inner for-loop, where we calculate dw1, dw2, db.
+
+## Vectorizing Logistic Regression
+z = np.dot(W.T, X) + b
+
+Does all the vectorized operations all at once. Even where b is a single value, python uses broadcasting to turn it into a 1xm vector that can be added.
+
+Now, we just need to figure out how to vectorize the second step, where we calculate the sigmoid for z.
+
+## Vectorizing Logistic Regression's Gradient Output
+np.sum(dZ) / m -- to calculate db.
+
+dw becomes 1/m * X * dZ.T
+
+Five equations, and can do a single iteration of gradient descent without having to use a for-loop. May still need to do this if you want to do a number of iterations.
+## Broadcasting in Python
+Look at a 3 x 4 matrix, want to sum each column and then divide each element in the column by the sum.
+
+Called reshape when not strictly necessary, but a habit to deal with case when you're not entirely sure what shape your output is.
+
+Python coerces inputs into whatever format makes sense -- if you add m x n matrix and a 1 x n vector, then python will turn the 1 x n matrix into m x n by simply adding rows of the original vector until it's the right size.
+## A note on python/numpy vectors
+Can get some strange results (add a row to a column, get a matrix).
+
+a = np.random.randn(5) gives you what's called a "rank 1 arrayt", which is neither a row vector nor a column vector. Better off being explicit, and creating things as rows or columns explicitly on creation. Also can use assert statements like
+assert(A.shape == (5,1))
+as a quick check to verify that you are working with what you think you are. Can also use "reshape()" to help ensure things are in the right shape.
+## A quick tour of Jupyter/ipython notebooks
+Running notebooks from Coursera. Kill kernel if necessary, run all blocks even if they print nothing. Submit button right at the top when you're done.
+## Explanation of logistic regression cost function (optional)
+Derivation of the cost function. 
