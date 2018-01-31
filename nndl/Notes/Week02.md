@@ -139,4 +139,4 @@ as a quick check to verify that you are working with what you think you are. Can
 ## A quick tour of Jupyter/ipython notebooks
 Running notebooks from Coursera. Kill kernel if necessary, run all blocks even if they print nothing. Submit button right at the top when you're done.
 ## Explanation of logistic regression cost function (optional)
-Derivation of the cost function. 
+Derivation of the cost function.
