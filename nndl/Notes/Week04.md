@@ -65,3 +65,4 @@ What are hyperparameters? Things like $\alpha$ (learning rate), # of iterations,
 
 Often will iterate through various options for hyperparameters, to explore how your neural network performs and compare against other sets of parameters.
 ## What Does that have to do with the Brain
+Only a superficial link -- neuron gets signals from other neurons, processes, and sends output. But we don't really know what a neuron does, it looks to be a fairly complex system. 
