@@ -95,7 +95,15 @@ Look at deep networks -- if W is even just a little bit bigger than the identity
 ## Weight Initialization for Deep Networks
 Often find that setting the variance of your initial weight matrix to be $\frac{1}{n}$, helps to force the weight matrix to be constrained so that it doesn't explode or vanish. ReLU it works out that it's a bit better to use $\frac{2}{n}$. Can also look at Xavier initialization ($\tanh \sqrt{\frac{1}{n^{[l - 1]}}}$)
 ## Numerical Approximations of Gradients
-
+Two-sided approximation a more accurate way to check your gradient's slope.
 ## Gradient Checking
+Take all of your Ws and bs, reshape into vectors and concatenate them together ($\Theta$). Do the same for your dW and db (into vector d$\Theta$).
+
+Now, for each element in the two vectors, calculate $\frac{J(\Theta + \epsilon) - J(\Theta - \epsilon)}{2\epsilon}$, and then see if this is approximately the same as your d$\Theta$.
 
 ## Gradient Checking Implementation Notes
+Only do the grad checking for debugging, then turn off. This is a very slow check.
+
+If you have a problem, need to start digging in, look at where things seem to be far apart (is it with db or dW?).
+
+Grad check doesn't work with dropout.
