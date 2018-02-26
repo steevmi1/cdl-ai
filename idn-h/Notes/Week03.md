@@ -4,11 +4,23 @@ Learning Objectives
 Master the process of hyperparameter tuning
 # Hyperparameter tuning
 ## Tuning process
+Learning rate ($\alpha$), momentum term ($\beta$), if you're using ADAM then you also have $\beta_{1}$, $\beta_{2}$, and $\epsilon$. Number of layers (L), # of hidden units, the decay factor for your learning rate if you're using that, mini-batch size.
 
+Some are more important than others -- learning rate is most important, followed by momentum, mini-batch size, and number of layers. After that, layers and decay, the rest typically don't get changed from defaults.
+
+Better to randomly select when you look at a combination of hyperparameters, you get better sampling/coverage of the space. Also can use coarse-to-fine scheme -- find a region where things look good, then narrow the ranges for the hyperparameters and then resample.
 ## Using an apropriate scale to pick hyperparameters
+Sometimes when looking at something like number of layers, you just have to look at things regularly (e.g. if you want to look at something with 2, 3 or 4 layers).
 
+In other cases, like learning rate, makes more sense to conver to a log scale to generate your random range. As an example if you want to look at a learning rate between 0.0001 and 1, then on a log scale you're looking at a range of [-4,0] ($10^{-4}$ = 0.0001), then you can do
+r = -4 * np.random.randn()
+$\alpha$ = $10^{r}$
+
+Also tricky is hyperparameters for EWA. If you want $\beta$ to vary between 0.9 and 0.999, then a linear scale doesn't make as much sense. If we look at (1 - $\beta$), then this goes from 0.1 to 0.001, which if we look at a log scale means we're working between $10^{-1}$ and $10^{-3}$, which we can convert to the same system as we used for learning rate, calculate r, and then use that to determine 1 - $\beta$.
 ## Hyperparameters tuning in practice: Pandas vs. Caviar
+Data can gradually change over time (also your compute environment), so periodically good to go back and re-evaluate your hyperparameters on occasion.
 
+One model at a time approach (maybe computationally limited, so much data and models so large) versus training many models in parallel. First approach, look at day 1 results from day 0, adjust something, then look at results on day 2.
 # Batch Normalization
 
 # Multi-class classification
