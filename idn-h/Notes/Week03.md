@@ -38,7 +38,7 @@ $$ \hat{z^{i}} = \gamma z^{i}_{norm} + \beta$$
 Where $\gamma$ and $\beta$ are now learnable parameters for your model. You can set gamma and beta to give you a standard normalization.
 
 ## Fitting BatchNorm into a neural network
-
+Each node in a neural network is computing two things -- z, and a. With BatchNorm, what we do is compute z, then apply BatchNorm to compute $\hat{z}$. Use $\hat{z}$ to compute a, then use this as our next input to compute the next z. Then, just keep repeating, after computing this next z, use BatchNorm to compute $\hat{z}$ for this step. This gives you a whole new set of $\beta$ and $\gamma$ parameters for each step, and you can optimize them (ADAM, and so on) the way you would any other.
 ## Why does BatchNorm work?
 
 ## BatchNorm at test time
