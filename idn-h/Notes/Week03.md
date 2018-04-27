@@ -55,5 +55,42 @@ Softmax is really just logistic regression generalized to more than two classes.
 $$ dz^{[l]} = \hat{y} - y$$
 # Introduction to programming frameworks
 ## Deep learning Frameworks
-
+So far we've just built everything from scratch. Works OK for learning and small examples, but as you build up it's not so efficient for you to be implementing everything yourself. This is where the frameworks come in, as they've taken care of most of the heavy lifting for you.
++ caffe/caffe2
++ CNTK
++ DL4J
++ Keras
++ Lasagne
++ mxnet
++ PaddlePaddle
++ TensorFlow
++ Theano
++ Torch
+All are commonly used, and changing/evolving rapidly. In many cases selection is up to personal choice, as they're all approximately equivalent.
 ## TensorFlow
+As an example, assume our cost function we're looking to optimize is
+$$ J(w) = w^{2} - 10w + 25 $$
+In tensorflow, this becomes
+```python
+import numpy as np
+import tensorflow as tf
+w = tf.Variable(0, dtype = tf.float32)
+cost = tf.add(tf.add(w**2, tf.multiply(-10., w)), 25)
+train = tf.train.GradientDescentOptimizer(0.01).minimize(cost)
+
+init = tf.global_variables_initializer()
+session = tf.Session()
+session.run(init)
+print(session.run(w))
+```
+Advantages to this are that backprop are done for you automatically, and there's also overloading, so you could just define your cost function as
+```python
+cost = w**2 - 10*w + 25
+```
+You can also start to do things like
+```python
+for i in range(1000):
+  session.run(train)
+print(session.run(w))
+```
+placeholder variable in tensorflow -- something that will be provided "later". 
