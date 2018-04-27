@@ -45,9 +45,14 @@ Why does this speed things up? First, like any other normalization. Also helps t
 BatchNorm normally works on minibatches of input data, what happens when we move to test? When you use it in training you use your batch size to divide and calculate your $\mu$ and $\sigma$. When you test, your batch size is 1, which doesn't work. Typically people will just keep a running average for the two values as they run through their test set which will give a reasonable value for them.
 # Multi-class classification
 ## Softmax regression
-
+What happens when we move to a multi-class problem (cats, and dogs, and birds, and "none of the above"...)? Now your final layer has four output units (has to match the number of classes you have), and each unit will be the probability that your object belongs to that class (and must sum to 1). The method that people use to accomplish this is softmax, where the activation function becomes
+$$ t = e^{(z^{[l]})} $$
+$$ a = \frac{e^{z^[l]}}{\sum_{j = 1}^{4}t_{i}} $$
+For the first step, t is a temporary variable and is an element-wise exponentiation (if $z^{[l]}$ is a (4,1) vector then t is similarly a (4,1) vector).
 ## Training a softmax classifier
+Softmax is really just logistic regression generalized to more than two classes. When you get to backprop, then you compute
 
+$$ dz^{[l]} = \hat{y} - y$$
 # Introduction to programming frameworks
 ## Deep learning Frameworks
 
