@@ -42,7 +42,7 @@ Each node in a neural network is computing two things -- z, and a. With BatchNor
 ## Why does BatchNorm work?
 Why does this speed things up? First, like any other normalization. Also helps to handle the "covariate shift" effect, where you have your data distribution changing (a batch of black cats, then a batch of cats with other colorings). This works to prevent the early layers from having a larger effect than the later layers.
 ## BatchNorm at test time
-
+BatchNorm normally works on minibatches of input data, what happens when we move to test? When you use it in training you use your batch size to divide and calculate your $\mu$ and $\sigma$. When you test, your batch size is 1, which doesn't work. Typically people will just keep a running average for the two values as they run through their test set which will give a reasonable value for them.
 # Multi-class classification
 ## Softmax regression
 
