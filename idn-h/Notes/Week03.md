@@ -22,7 +22,33 @@ Data can gradually change over time (also your compute environment), so periodic
 
 One model at a time approach (maybe computationally limited, so much data and models so large) versus training many models in parallel. First approach, look at day 1 results from day 0, adjust something, then look at results on day 2.
 # Batch Normalization
+## Normalizing activations in a network
+We already know that we can normalize the inputs to speed up our learning. Question is if we can normalize a hidden layer $a^{[l]}$ so that we can learn w and b faster?
+
+For a neural network, we usually will normalize the z values. Can do this the standard way
+
+$$\mu = \frac{1}{m} \sum_{i} z^{i}$$
+$$\sigma^{2} = \frac{1}{m} \sum_{i} (z^{i} - \mu)$$
+$$z^{i}_{norm} = \frac{z^{i} - \mu}{\sqrt{(\sigma^{2} - \epsilon)}}$$
+
+This normalizes with mean 0 (and variance 1), but sometimes we don't alwayts want this. In that case, what we can do is to compute
+
+$$ \hat{z^{i}} = \gamma z^{i}_{norm} + \beta$$
+
+Where $\gamma$ and $\beta$ are now learnable parameters for your model. You can set gamma and beta to give you a standard normalization.
+
+## Fitting BatchNorm into a neural network
+
+## Why does BatchNorm work?
+
+## BatchNorm at test time
 
 # Multi-class classification
+## Softmax regression
+
+## Training a softmax classifier
 
 # Introduction to programming frameworks
+## Deep learning Frameworks
+
+## TensorFlow
