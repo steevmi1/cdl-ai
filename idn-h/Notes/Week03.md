@@ -40,7 +40,7 @@ Where $\gamma$ and $\beta$ are now learnable parameters for your model. You can 
 ## Fitting BatchNorm into a neural network
 Each node in a neural network is computing two things -- z, and a. With BatchNorm, what we do is compute z, then apply BatchNorm to compute $\hat{z}$. Use $\hat{z}$ to compute a, then use this as our next input to compute the next z. Then, just keep repeating, after computing this next z, use BatchNorm to compute $\hat{z}$ for this step. This gives you a whole new set of $\beta$ and $\gamma$ parameters for each step, and you can optimize them (ADAM, and so on) the way you would any other.
 ## Why does BatchNorm work?
-
+Why does this speed things up? First, like any other normalization. Also helps to handle the "covariate shift" effect, where you have your data distribution changing (a batch of black cats, then a batch of cats with other colorings). This works to prevent the early layers from having a larger effect than the later layers.
 ## BatchNorm at test time
 
 # Multi-class classification
