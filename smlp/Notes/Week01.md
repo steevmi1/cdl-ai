@@ -62,11 +62,31 @@ Need to drill into why your algorithms have differences in how they're performin
 # Comparing to human-level performances
 
 ## Why human-level performance?
+Why do we care about human-level performance? In a lot of cases you're trying to mimic (or replace) humans using these tools and techniques, so that's the ultimate metric of how well you're doing. Really looking at two different thresholds -- how well does the average human do, and then what's the best possible that could ever be done (Bayes optimal error). In many cases, the difference between the two thresholds are very minimal.
 
+While your algorithm is performing worse than a human, can use humans to understand where you're failing, get more labeled data for training.
 ## Avoidable bias
+Human level performance gives you a metric to evaluate how well your training set does. If your training set is very close, then maybe the issues are that your dev set needs to be adjusted. But if your training set is far off from human, then you should be working to adjust at the training layer.
 
+Avoidable bias -- difference between human-level error and your training set. Difference between training error and dev error is your variance.
 ## Understanding human-level performance
+Talk about human-level performance, but you can still have multiple levels of performance -- medical images, and error rates for untrained human, "average" doctor/radiologist, expert, and team of experts. Which one should you pick?
 
+In this case, the team example is probably close enough to Bayes optimal error, and you can consider your "human-level" target to be the typical doctor case.
 ## Surpassing human-level performance
+What happens if your training and dev performance beats your human-level performance? Have you overfit your model, or are you operating in that spot between human-level and Bayes optimal?
 
+Number of cases where ML can outperform a human are actually fairly small and limited right now -- advertising/recommendations, logistics, loan approvals. All of these are fairly structured, and not natural perception problems. All of them have access to tremendous amounts of data for training, so that the algorithm can find statistical patterns that humans can't.
+
+Some very limited natural perception problems where the algorithms can do better than people, but more the exception rather than the rule.
 ## Improving your model performance
+Two fundamental assumptions.
+1. You can fit the training set very well
+low avoidable bias
+1. The training set performance generalizes pretty well to the dev set
+low variance
+
++ Avoidable bias
+Train a bigger model, longer/better optimization algorithms (Adam, RMSprop, momentum), neural network architecture/hyperparameter search
++ Variance
+More data, regularization, nn architecture/hyperparameter search
